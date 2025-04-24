@@ -1,32 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
 
-interface MembersResponse {
-  members: string[];
-}
-
-function App() {
-  const [data, setData] = useState<MembersResponse | null>(null);
-
-  useEffect(() => {
-    fetch("/members")
-      .then(res => res.json())
-      .then((data: MembersResponse) => {
-        setData(data);
-        console.log(data);
-      });
-  }, []);
-
-  return (
-    <div>
-      {!data ? (
-        <p>loading...</p>
-      ) : (
-        data.members.map((member, i) => (
-          <p key={i}>{member}</p>
-        ))
-      )}
-    </div>
-  );
-}
+const App = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="*" element={<NotFound/>} />
+    </Routes>
+  </BrowserRouter>
+);
 
 export default App;
+
