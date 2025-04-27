@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Button } from "./ui/button"; // Ensure the path is correct
-import { Input } from "./ui/input"; // Ensure the path is correct
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 import { Search } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -17,8 +17,27 @@ const Navbar: React.FC = () => {
 
   return (
     <nav style={{ borderBottom: "1px solid #ccc", backgroundColor: "#fff" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "16px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Link to="/" style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none" }}>
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "16px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Link
+          to="/"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            textDecoration: "none",
+            position: "absolute",
+            left: "16px",
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -32,27 +51,61 @@ const Navbar: React.FC = () => {
             <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
             <polyline points="9 22 9 12 15 12 15 22" />
           </svg>
-          <span style={{ fontSize: "20px", fontWeight: "bold", color: "#333" }}>Moverse Rural</span>
+          <span style={{ fontSize: "20px", fontWeight: "bold", color: "#333" }}>
+            Moverse Rural
+          </span>
         </Link>
 
-        <form onSubmit={handleSearch} style={{ display: "flex", position: "relative", maxWidth: "400px", flex: "1", margin: "0 16px" }}>
+        <form
+          onSubmit={handleSearch}
+          style={{
+            display: "flex",
+            position: "relative",
+            maxWidth: "800px",
+            flex: "1",
+            margin: "0",
+          }}
+        >
           <Input
             type="search"
             placeholder="Search villages..."
-            style={{ width: "100%", paddingRight: "40px" }}
+            style={{
+              width: "100%",
+              padding: "10px 40px 10px 16px",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              boxSizing: "border-box",
+              outline: "none",
+            }}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <Button 
-            type="submit" 
-            style={{ position: "absolute", right: "0", top: "0", height: "100%" }}
+          <Button
+            type="submit"
+            style={{
+              position: "absolute",
+              right: "0",
+              top: "0",
+              height: "100%",
+              border: "none",
+              background: "none",
+              cursor: "pointer",
+            }}
           >
-            <Search style={{ height: "16px", width: "16px" }} />
+            <Search style={{ height: "16px", width: "16px", color: "#999" }} />
             <span style={{ display: "none" }}>Search</span>
           </Button>
         </form>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "16px",
+            position: "absolute",
+            right: "16px",
+          }}
+        >
           <Link to="/login">
             <Button variant="outline">Sign In</Button>
           </Link>
