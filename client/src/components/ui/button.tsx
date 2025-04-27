@@ -9,8 +9,8 @@ const buttonStyles = {
     gap: "8px",
     whiteSpace: "nowrap",
     border: "none",
-    borderRadius: "6px", // Cambia esto según el tamaño de borde que desees
-    fontSize: "14px", // Cambia esto según el tamaño de fuente que desees
+    borderRadius: "6px",
+    fontSize: "14px",
     fontWeight: "500",
     transition: "background-color 0.2s ease, color 0.2s ease",
     outline: "none",
@@ -18,45 +18,45 @@ const buttonStyles = {
   },
   variants: {
     default: {
-      backgroundColor: "#28A745", // Color de fondo primario
-      color: "#ffffff", // Color de texto primario
-      boxShadow: "none", // <-- Esto lo añade
+      backgroundColor: "#28A745",
+      color: "#ffffff",
+      boxShadow: "none",
       "&:hover": {
-        backgroundColor: "#0056b3", // Color de fondo al pasar el mouse
+        backgroundColor: "#51db71",
       },
     },
     destructive: {
-      backgroundColor: "#dc3545", // Color de fondo destructivo
-      color: "#ffffff", // Color de texto destructivo
+      backgroundColor: "#dc3545",
+      color: "#ffffff",
       "&:hover": {
-        backgroundColor: "#c82333", // Color de fondo al pasar el mouse
+        backgroundColor: "#c82333",
       },
     },
     outline: {
-      border: "1px solid #ced4da", // Borde de entrada
-      backgroundColor: "#ffffff", // Color de fondo
-      color: "#495057", // Color de texto
+      border: "1px solid #ced4da",
+      backgroundColor: "#ffffff",
+      color: "#495057",
       "&:hover": {
-        backgroundColor: "#f8f9fa", // Color de fondo al pasar el mouse
+        backgroundColor: "#51db71",
       },
     },
     secondary: {
-      backgroundColor: "#6c757d", // Color de fondo secundario
-      color: "#ffffff", // Color de texto secundario
+      backgroundColor: "#6c757d",
+      color: "#ffffff",
       "&:hover": {
-        backgroundColor: "#5a6268", // Color de fondo al pasar el mouse
+        backgroundColor: "#5a6268",
       },
     },
     ghost: {
-      backgroundColor: "transparent", // Fondo transparente
-      color: "#007bff", // Color de texto
+      backgroundColor: "transparent",
+      color: "#007bff",
       "&:hover": {
-        backgroundColor: "#e2e6ea", // Color de fondo al pasar el mouse
+        backgroundColor: "#e2e6ea",
       },
     },
     link: {
-      backgroundColor: "transparent", // Fondo transparente
-      color: "#007bff", // Color de texto
+      backgroundColor: "transparent",
+      color: "#007bff",
       textDecoration: "underline",
       "&:hover": {
         textDecoration: "underline",
@@ -93,17 +93,27 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", size = "default", asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
-    const style = {
+    const [hovered, setHovered] = React.useState(false);
+
+    const baseStyle = {
       ...buttonStyles.base,
       ...buttonStyles.variants[variant],
       ...buttonStyles.sizes[size],
-      ...props.style, // Permitir estilos adicionales
+      ...props.style, // permitir sobrescritura de estilos externos
     };
+
+    const hoverStyle = buttonStyles.variants[variant]["&:hover"] || {};
+
+    const finalStyle = hovered
+      ? { ...baseStyle, ...hoverStyle }
+      : baseStyle;
 
     return (
       <Comp
-        style={style}
+        style={finalStyle}
         ref={ref}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         {...props}
       />
     );
