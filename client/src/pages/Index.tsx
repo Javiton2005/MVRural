@@ -1,5 +1,5 @@
 import Layout from "../components/layout"
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Search } from "lucide-react";
@@ -7,16 +7,34 @@ import { useNavigate } from "react-router-dom";
 import './index.css'
 import { MapPin, Map, Globe, Users } from "react-feather";
 
+interface Pueblo {
+  id: number;
+  nombre: string;
+  ubicacion: string;
+  habitantes: number;
+}
+
 const Index: React.FC = () => {
+    let cantidad: number =4;
     const [searchQuery, setSearchQuery] = useState<string>("");
     const navigate = useNavigate();
-
+    const [pueblos, setPueblos] = useState<Pueblo[]>([]);
+    
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (searchQuery.trim()) {
         navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
         }
     };
+
+    useEffect(() => {
+      fetch(`http://localhost:5000/pueblos?n=${cantidad}`)
+        .then(response => response.json())
+        .then(data => setPueblos(data))
+        .catch(error => console.error("Error al obtener pueblos:", error));
+    }, []); // <= solo se ejecuta una vez al montar el componente
+    
+
     return (
         <Layout>
             <section className="relative bg-gradient-to-r from-primary/90 to-accent/90 text-white py-20 sectiona">
@@ -138,7 +156,15 @@ const Index: React.FC = () => {
       </div>
     </section>
 
-
+    <div>
+      <ul>
+        {pueblos.map(pueblo => (
+          <li key={pueblo.id}>
+            <strong>{pueblo.nombre}</strong> - {pueblo.ubicacion} ({pueblo.habitantes} habitantes)
+          </li>
+        ))}
+      </ul>
+    </div>
 
     </Layout>
     );
