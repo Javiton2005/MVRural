@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav style={{ borderBottom: "1px solid #ccc", backgroundColor: "#fff" }}>
+    <nav style={{ borderBottom: "1px solid #ccc", backgroundColor: "#fff", width: "100%" }}>
       <div
         style={{
           maxWidth: "1200px",
@@ -24,18 +24,19 @@ const Navbar: React.FC = () => {
           padding: "16px",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "16px",
         }}
       >
+        {/* Logo */}
         <Link
           to="/"
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "8px",
             textDecoration: "none",
-            position: "absolute",
-            left: "16px",
+            gap: "8px",
           }}
         >
           <svg
@@ -56,14 +57,15 @@ const Navbar: React.FC = () => {
           </span>
         </Link>
 
+        {/* Search Bar */}
         <form
           onSubmit={handleSearch}
           style={{
+            flex: "1 1 300px", // que se expanda pero mínimo 300px
             display: "flex",
             position: "relative",
-            maxWidth: "800px",
-            flex: "1",
-            margin: "0",
+            maxWidth: "600px",
+            margin: "0 auto",
           }}
         >
           <Input
@@ -74,7 +76,6 @@ const Navbar: React.FC = () => {
               padding: "10px 40px 10px 16px",
               border: "1px solid #ccc",
               borderRadius: "4px",
-              boxSizing: "border-box",
               outline: "none",
             }}
             value={searchQuery}
@@ -84,28 +85,23 @@ const Navbar: React.FC = () => {
             type="submit"
             style={{
               position: "absolute",
-              right: "0",
-              top: "0",
-              height: "100%",
-              border: "none",
+              right: "8px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              height: "auto",
+              padding: "4px",
               background: "none",
+              border: "none",
               cursor: "pointer",
             }}
           >
-            <Search style={{ height: "16px", width: "16px", color: "#999" }} />
+            <Search style={{ height: "20px", width: "20px", color: "#666" }} />
             <span style={{ display: "none" }}>Search</span>
           </Button>
         </form>
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "16px",
-            position: "absolute",
-            right: "16px",
-          }}
-        >
+        {/* Auth Buttons */}
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <Link to="/login">
             <Button variant="outline">Sign In</Button>
           </Link>

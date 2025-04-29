@@ -1,0 +1,274 @@
+/* Global styles */
+body {
+    margin: 0;
+}
+
+/* Layout styles */
+.sectiona {
+    position: relative;
+    background: linear-gradient(to right, rgba(9, 161, 4, 0.9), rgba(3, 170, 73, 0.9));
+    color: white;
+    padding: 5rem 0; /* 20 * 0.25rem */
+}
+
+.absolute {
+    position: absolute;
+}
+
+.inset-0 {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1200px; /* Adjust as necessary */
+    margin: 0 auto;
+    padding: 0 1rem; /* 4 * 0.25rem */
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-4xl {
+    font-size: 2.25rem; /* 36px */
+}
+
+.md\:text-5xl {
+    font-size: 3rem; /* 48px */
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.mb-6 {
+    margin-bottom: 1.5rem; /* 6 * 0.25rem */
+}
+
+.text-lg {
+    font-size: 1.125rem; /* 18px */
+}
+
+.mb-8 {
+    margin-bottom: 2rem; /* 8 * 0.25rem */
+}
+
+.max-w-md {
+    max-width: 28rem; /* 448px */
+}
+
+.relative {
+    position: relative;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.pl-10 {
+    padding-left: 2.5rem; /* 10 * 0.25rem */
+}
+
+.pr-20 {
+    padding-right: 5rem; /* 20 * 0.25rem */
+}
+
+.py-6 {
+    padding-top: 1.5rem; /* 6 * 0.25rem */
+    padding-bottom: 1.5rem; /* 6 * 0.25rem */
+}
+
+.text-black {
+    color: black;
+}
+
+.pointer-events-none {
+    pointer-events: none;
+}
+
+.h-5 {
+    height: 1.25rem; /* 20px */
+}
+
+.w-5 {
+    width: 1.25rem; /* 20px */
+}
+
+.text-gray-400 {
+    color: rgba(156, 163, 175, 1); /* gray-400 */
+}
+
+.absolute {
+    position: absolute;
+}
+
+.h-10 {
+    height: 2.5rem; /* 40px */
+}
+
+/* Additional styles for button */
+button {
+    cursor: pointer;
+    padding: 0.5rem 1rem; /* Adjust as necessary */
+    background-color: #007bff; /* Primary color */
+    border: none;
+    border-radius: 0.25rem; /* Adjust for rounded corners */
+    color: white;
+    font-size: 1rem; /* Adjust as necessary */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade for hover */
+}
+.why-use-villagehub {
+    padding: 4rem 0;
+}
+  
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+  
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+  
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+  
+@media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+}
+  
+@media (min-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+}
+  
+.card {
+    background-color: #f8f8f8; /* bg-background */
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+  
+.card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+  
+.icon-container {
+    background-color: rgba(31, 41, 55, 0.1); /* bg-primary/10 */
+    padding: 1rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+  
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #4F46E5; /* text-primary */
+}
+  
+.subtitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+  
+.description {
+    color: #6B7280; /* text-muted-foreground */
+}
+.sectionc {
+    background-color: #f1f5f9; /* parecido a bg-accent/10 */
+    padding: 4rem 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: center;
+  }
+  
+  .content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 1.125rem;
+    color: #6b7280; /* color gris tipo text-muted-foreground */
+    margin-bottom: 2rem;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .btn {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s;
+  }
+  
+  .primary {
+    background-color: #28A745; /* azul */
+    color: white;
+  }
+  
+  .primary:hover {
+    background-color: #51db71; /* azul más oscuro */
+  }
+  
+  .secondary {
+    background-color: transparent;
+    border: 2px solid #28A745;
+    color: #28A745;
+  }
+  
+  .secondary:hover {
+    background-color: #51db71;
+    color: white;
+  }
+  
+  .separator {
+    width: 1px;
+    height: 24px;
+    background-color: #d1d5db; /* gris claro */
+  }
+  
