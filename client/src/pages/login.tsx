@@ -38,78 +38,80 @@ const Login = () => {
     };
   
     return (
-      <div className="login-container">
-        <div className="login-card">
-          <div className="card-header">
-            <h2 className="card-title">Sign in to your account</h2>
-            <p className="card-description">
-              Enter your email below to access the VillageHub platform
-            </p>
-          </div>
-          <div className="card-content">
-            <form onSubmit={handleSubmit} className="login-form">
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="name@example.com"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-              </div>
-  
-              <div className="form-group">
-                <div className="form-label-inline">
-                  <label htmlFor="password">Password</label>
-                  <a href="/forgot-password" className="link-small">
-                    Forgot password?
-                  </a>
-                </div>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-              </div>
-  
-              <div className="form-group checkbox-group">
-                <input
-                  id="rememberMe"
-                  name="rememberMe"
-                  type="checkbox"
-                  checked={formData.rememberMe}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      rememberMe: e.target.checked,
-                    }))
-                  }
-                />
-                <label htmlFor="rememberMe">Remember me</label>
-              </div>
-  
-              <button type="submit" className="btn-primary" disabled={isLoading}>
-                {isLoading ? "Loading..." : "Sign In"}
-              </button>
-            </form>
-  
-            <div className="signup-text">
-              <p>
-                Don't have an account?{" "}
-                <a href="/register" className="link-primary">
-                  Sign up for free
-                </a>
+      <Layout>
+        <div className="login-container">
+          <div className="login-card">
+            <div className="card-header">
+              <h2 className="card-title">Sign in to your account</h2>
+              <p className="card-description">
+                Enter your email below to access the VillageHub platform
               </p>
+            </div>
+            <div className="card-content">
+              <form onSubmit={handleSubmit} className="login-form">
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="name@example.com"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                </div>
+    
+                <div className="form-group">
+                  <div className="form-label-inline">
+                    <label htmlFor="password">Password</label>
+                    <a href="/forgot-password" className="link-small">
+                      Forgot password?
+                    </a>
+                  </div>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                </div>
+    
+                <div className="form-group checkbox-group">
+                  <input
+                    id="rememberMe"
+                    name="rememberMe"
+                    type="checkbox"
+                    checked={formData.rememberMe}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        rememberMe: e.target.checked,
+                      }))
+                    }
+                  />
+                  <label htmlFor="rememberMe">Remember me</label>
+                </div>
+    
+                <button type="submit" className="btn-primary" disabled={isLoading}>
+                  {isLoading ? "Loading..." : "Sign In"}
+                </button>
+              </form>
+    
+              <div className="signup-text">
+                <p>
+                  Don't have an account?{" "}
+                  <a href="/register" className="link-primary">
+                    Sign up for free
+                  </a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Layout>
     );
   };
   
