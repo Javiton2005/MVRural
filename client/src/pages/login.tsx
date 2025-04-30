@@ -4,8 +4,7 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import './index.css'
-import "./Login.css"; 
+import './index.css'; 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
