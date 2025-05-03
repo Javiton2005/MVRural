@@ -12,6 +12,14 @@ supabase: Client = create_client(url, key)
 
 app = Flask(__name__)
 
+# Mapeo de preferencias a valores de la base de datos
+PREFERENCE_MAPPING = {
+    "playa": "a",
+    "montaña": "b",
+    "ciudad": "c",
+    "ninguna": "d"
+}
+
 @app.route("/pueblos", methods=["GET"])
 def get_pueblos():
     n = request.args.get("n", default=5, type=int)
@@ -31,45 +39,120 @@ def login():
         }), 400
 
     try:
-        # 1. Buscar usuario por email (solo email primero)
         result = supabase.table("users").select("*").eq("email", email).execute()
 
-        # 2. Verificar si el usuario existe
         if not result.data:
             return jsonify({
                 "success": False,
-                "error": "Invalid credentials"  # Mensaje genérico por seguridad
+                "error": "Invalid credentials"
             }), 401
 
         user = result.data[0]
 
-        # 3. Verificar contraseña (sin hash en este ejemplo)
         if user["password"] != password:
             return jsonify({
                 "success": False,
-                "error": "Invalid credentials"  # Mismo mensaje que arriba
+                "error": "Invalid credentials"
             }), 401
 
-        # 4. Preparar respuesta exitosa
+        # Convertir preferencia de BD a valor amigable
+        reverse_mapping = {v: k for k, v in PREFERENCE_MAPPING.items()}
+        user_preference = reverse_mapping.get(user["preference"], "ninguna")
+
         user_data = {
             "id": user["id"],
-            "name": user.get("username") or user.get("full_name") or "Usuario",  # Campos alternativos
+            "username": user["username"],
             "email": user["email"],
-            # Añade otros campos que necesites en el frontend
-            "avatar": user.get("avatar_url")  # Ejemplo de campo opcional
+            "role": user["user_role"],
+            "preference": user_preference
         }
 
         return jsonify({
             "success": True,
             "message": "Login successful",
-            "user": user_data  # Datos limpios sin password
+            "user": user_data
         })
 
     except Exception as e:
-        print(f"Login error: {str(e)}")  # Log para debugging
+        print(f"Login error: {str(e)}")
         return jsonify({
             "success": False,
             "error": "Internal server error"
+        }), 500
+    
+@app.route("/register", methods=["POST"])
+def register():
+    data = request.get_json()
+    
+    try:
+        # Validación de campos requeridos
+        required_fields = ["username", "email", "password", "preference"]
+        if not all(field in data for field in required_fields):
+            return jsonify({
+                "success": False,
+                "error": "Faltan campos requeridos"
+            }), 400
+
+        # Verificar si el usuario ya existe
+        existing_user = supabase.table("users").select("*").or_(f"email.eq.{data['email']},username.eq.{data['username']}").execute()
+        
+        if existing_user.data:
+            return jsonify({
+                "success": False,
+                "error": "El email o username ya están registrados"
+            }), 400
+
+        # Crear el nuevo usuario
+        new_user = {
+            "username": data["username"],
+            "email": data["email"],
+            "password": data["password"],  # En producción usa bcrypt!
+            "user_role": "user",
+            "preference": data["preference"]
+        }
+
+        # Insertar en Supabase
+        result = supabase.table("users").insert(new_user).execute()
+        
+        if not result.data:
+            return jsonify({
+                "success": False,
+                "error": "No se pudo crear el usuario"
+            }), 500
+
+        return jsonify({
+            "success": True,
+            "message": "Registro exitoso",
+            "user": {
+                "username": result.data[0]["username"],
+                "email": result.data[0]["email"]
+            }
+        })
+
+    except Exception as e:
+        print(f"Error en registro: {str(e)}")
+        return jsonify({
+            "success": False,
+            "error": f"Error en el servidor: {str(e)}"
+        }), 500
+
+@app.route("/preferences", methods=["GET"])
+def get_preferences():
+    try:
+        # Devuelve las preferencias con nombres amigables
+        return jsonify({
+            "success": True,
+            "preferences": [
+                {"id": "a", "name": "playa", "label": "Playa 🏖️"},
+                {"id": "b", "name": "montaña", "label": "Montaña ⛰️"},
+                {"id": "c", "name": "ciudad", "label": "Ciudad 🏙️"},
+                {"id": "d", "name": "ninguna", "label": "Ninguna preferencia"}
+            ]
+        })
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
         }), 500
 
 if __name__ == "__main__":

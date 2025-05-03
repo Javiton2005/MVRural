@@ -11,3 +11,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.preferences-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.preference-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preference-option:hover {
+  border-color: #28a745;
+}
+
+.preference-radio {
+  margin: 0;
+}
+
+.error-text {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
