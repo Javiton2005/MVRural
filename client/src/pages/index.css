@@ -354,3 +354,234 @@ button:hover {
   .link-primary:hover {
     text-decoration: underline;
   }
+  .login-container {
+    padding: 3rem 1rem;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #f5fdf6; /* fondo claro verde */
+  }
+  
+  .login-card-wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .login-card {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(34, 139, 34, 0.1); /* verde oscuro translúcido */
+  }
+  
+  .card-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+    color: #2e7d32; /* verde fuerte */
+  }
+  
+  .card-description {
+    font-size: 0.95rem;
+    color: #4e944f;
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-label-inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .input-field {
+    padding: 0.5rem;
+    border: 1px solid #a5d6a7;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .checkbox-label {
+    font-size: 0.9rem;
+  }
+  
+  .btn-primary {
+    background-color: #43a047;
+    color: white;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary:disabled {
+    background-color: #a5d6a7;
+    cursor: not-allowed;
+  }
+  
+  .btn-primary:hover:not(:disabled) {
+    background-color: #388e3c;
+  }
+  
+  .link-small,
+  .link-primary {
+    color: #2e7d32;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .link-small:hover,
+  .link-primary:hover {
+    text-decoration: underline;
+  }
+  
+  .signup-text {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    color: #4e944f;
+  }
+  .register-container {
+    padding: 3rem 1rem;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #f5fdf6;
+  }
+  
+  .register-card-wrapper {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+  
+  .register-card {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(34, 139, 34, 0.1);
+  }
+  
+  .card-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-description {
+    font-size: 0.95rem;
+    color: #4e944f;
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .input-field {
+    padding: 0.5rem;
+    border: 1px solid #a5d6a7;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .checkbox-input {
+    accent-color: #2e7d32;
+  }
+  
+  .checkbox-label {
+    font-size: 0.9rem;
+  }
+  
+  .btn-primary {
+    background-color: #43a047;
+    color: white;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary:disabled {
+    background-color: #a5d6a7;
+    cursor: not-allowed;
+  }
+  
+  .btn-primary:hover:not(:disabled) {
+    background-color: #388e3c;
+  }
+  
+  .error-text {
+    font-size: 0.85rem;
+    color: #d32f2f;
+    margin-top: -0.3rem;
+  }
+  
+  .link-primary {
+    color: #2e7d32;
+    text-decoration: none;
+  }
+  
+  .link-primary:hover {
+    text-decoration: underline;
+  }
+  
+  .signup-text {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    color: #4e944f;
+  }
