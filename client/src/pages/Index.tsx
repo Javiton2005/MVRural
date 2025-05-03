@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import './index.css'
 import { MapPin, Map, Globe, Users } from "react-feather";
+import VillageCard, { VillageProps } from "../components/villagecard";
 
 interface Pueblo {
   id: number;
@@ -13,6 +14,17 @@ interface Pueblo {
   ubicacion: string;
   habitantes: number;
 }
+
+const puebloDemo: VillageProps =   {
+  id: "2",
+  name: "Oia",
+  location: "Santorini",
+  country: "Greece",
+  description: "Perched on the cliffs of Santorini, Oia is famous for its stunning sunset views, white-washed buildings with blue domes, and narrow winding streets. The village overlooks the vast Aegean Sea and the volcanic caldera.",
+  population: 1500,
+  imageUrl: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+  tags: ["Coastal", "Scenic", "Mediterranean", "Island"]
+};
 
 const Index: React.FC = () => {
     let cantidad: number =4;
@@ -36,7 +48,7 @@ const Index: React.FC = () => {
     
 
     return (
-        <Layout>
+      <Layout>
             <section className="relative bg-gradient-to-r from-primary/90 to-accent/90 text-white py-20 sectiona">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
@@ -155,19 +167,27 @@ const Index: React.FC = () => {
         </div>
       </div>
     </section>
-
-    <div>
-      <ul>
-        {pueblos.map(pueblo => (
-          <li key={pueblo.id}>
-            <strong>{pueblo.nombre}</strong> - {pueblo.ubicacion} ({pueblo.habitantes} habitantes)
-          </li>
-        ))}
-      </ul>
+    <div className="village-grid-wrapper">
+      <div className="village-grid">
+        {/* {villages.map((village) => (
+          
+        ))} */}
+        <div key={puebloDemo.id} className="village-grid-item">
+            <VillageCard village={puebloDemo} />
+          </div>
+          <div key={puebloDemo.id} className="village-grid-item">
+            <VillageCard village={puebloDemo} />
+          </div>
+          <div key={puebloDemo.id} className="village-grid-item">
+            <VillageCard village={puebloDemo} />
+          </div>
+          <div key={puebloDemo.id} className="village-grid-item">
+            <VillageCard village={puebloDemo} />
+          </div>
+      </div>
     </div>
-
-    </Layout>
-    );
+  </Layout>
+  );
 };
 
 export default Index;
