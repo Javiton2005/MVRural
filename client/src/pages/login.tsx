@@ -25,17 +25,43 @@ const Login = () => {
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
       setIsLoading(true);
-  
+      
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        toast.success("Login successful!");
+        const response = await fetch("http://localhost:5000/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          }),
+        });
+    
+        const data = await response.json();
+    
+        if (!response.ok) {
+          throw new Error(data.error || "Login failed");
+        }
+    
+        // ⭐⭐ AQUÍ VA EL CÓDIGO NUEVO ⭐⭐
+        localStorage.setItem("user", JSON.stringify({
+          name: data.user.name,    // Asegúrate que el backend devuelva estos campos
+          email: data.user.email
+        }));
+    
+        toast.success(data.message || "Login successful!");
         navigate("/");
-      } catch (error) {
-        toast.error("Login failed. Please check your credentials.");
+    
+      } catch (error: any) {
+        toast.error(error.message || "Login failed. Please check your credentials.");
       } finally {
         setIsLoading(false);
       }
     };
+    
+    
+    
   
     return (
       <Layout>

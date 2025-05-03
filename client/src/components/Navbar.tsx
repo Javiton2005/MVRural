@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Search } from "lucide-react";
+import { Search, User } from "lucide-react"; // Añadí el icono User
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const navigate = useNavigate();
+
+  // Efecto para verificar autenticación al cargar
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/");
+  };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +44,7 @@ const Navbar: React.FC = () => {
           gap: "16px",
         }}
       >
-        {/* Logo */}
+        {/* Logo (sin cambios) */}
         <Link
           to="/"
           style={{
@@ -57,11 +72,11 @@ const Navbar: React.FC = () => {
           </span>
         </Link>
 
-        {/* Search Bar */}
+        {/* Search Bar (sin cambios) */}
         <form
           onSubmit={handleSearch}
           style={{
-            flex: "1 1 300px", // que se expanda pero mínimo 300px
+            flex: "1 1 300px",
             display: "flex",
             position: "relative",
             maxWidth: "600px",
@@ -100,14 +115,32 @@ const Navbar: React.FC = () => {
           </Button>
         </form>
 
-        {/* Auth Buttons */}
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <Link to="/login">
-            <Button variant="outline">Sign In</Button>
-          </Link>
-          <Link to="/register">
-            <Button>Register</Button>
-          </Link>
+        {/* Área de usuario - CAMBIO PRINCIPAL */}
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          {user ? (
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <div style={{ textAlign: "right" }}>
+                <div style={{ fontWeight: 500 }}>{user.name}</div>
+                <div style={{ fontSize: "0.8rem", color: "#666" }}>{user.email}</div>
+              </div>
+              <Button 
+                variant="outline" 
+                onClick={handleLogout}
+                style={{ marginLeft: "8px" }}
+              >
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <>
+              <Link to="/login">
+                <Button variant="outline">Sign In</Button>
+              </Link>
+              <Link to="/register">
+                <Button>Register</Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

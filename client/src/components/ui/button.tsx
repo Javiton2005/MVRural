@@ -49,14 +49,14 @@ const buttonStyles = {
     },
     ghost: {
       backgroundColor: "transparent",
-      color: "#007bff",
+      color: "#51db71",
       "&:hover": {
         backgroundColor: "#e2e6ea",
       },
     },
     link: {
       backgroundColor: "transparent",
-      color: "#007bff",
+      color: "#51db71",
       textDecoration: "underline",
       "&:hover": {
         textDecoration: "underline",
