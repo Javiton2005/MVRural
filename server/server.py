@@ -19,11 +19,33 @@ PREFERENCE_MAPPING = {
     "ciudad": "c",
     "ninguna": "d"
 }
+@app.route("/turismo/<string:id>", methods=["GET"])
+def get_tourist_by_id(id):
+    try:
+        response = supabase.table("town").select("*").eq("id", id).execute()
 
+        if not response.data:
+            return jsonify({
+                "success": False,
+                "error": "No se encontró un turista con ese ID"
+            }), 404
+
+        return jsonify({
+            "success": True,
+            "tourist": response.data[0]
+        })
+
+    except Exception as e:
+        print(f"Error al obtener turista por ID: {str(e)}")
+        return jsonify({
+            "success": False,
+            "error": "Error interno del servidor"
+        }), 500
+    
 @app.route("/pueblos", methods=["GET"])
 def get_pueblos():
     n = request.args.get("n", default=5, type=int)
-    response = supabase.table("pueblos").select("*").limit(n).execute()
+    response = supabase.table("town").select("*").limit(n).execute()
     return jsonify(response.data)
 
 @app.route("/login", methods=["POST"])

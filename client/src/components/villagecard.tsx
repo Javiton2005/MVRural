@@ -7,12 +7,11 @@ import "./villagecard.css"
 
 export interface VillageProps {
   id: string;
-  name: string;
+  town_name: string;
   location: string;
-  country: string;
   description: string;
   population: number;
-  imageUrl: string;
+  imageURL: string;
   tags: string[];
 }
 
@@ -25,20 +24,17 @@ const VillageCard = ({ village }: VillageCardProps) => {
     <Card className="village-card">
       <div className="image-container">
         <img
-          src={village.imageUrl}
-          alt={village.name}
+          src={village.imageURL}
+          alt={village.town_name}
           className="village-image"
         />
       </div>
       <CardHeader>
         <div className="header-content">
-          <CardTitle>{village.name}</CardTitle>
+          <CardTitle>{village.town_name}</CardTitle>
         </div>
-        <CardDescription className="location">
-          <MapPin className="h-3.5 w-3.5" />
-          {village.location}, {village.country}
-        </CardDescription>
       </CardHeader>
+      <div>{village.location}</div>
       <CardContent className="card-body">
         <p className="description">{village.description}</p>
         <div className="population">

@@ -588,8 +588,7 @@ button:hover {
   }
 
   .village-grid-wrapper {
-    width: 100%;
-    padding: 2rem;
+    padding: 0px;
     display: flex;
     justify-content: center;
     background-color: #f8fafc; /* Fondo claro similar al ejemplo */
@@ -623,3 +622,7 @@ button:hover {
 
   
   /* Resto de tus estilos... */
+.spacer{
+  height: 40px;
+  background-color: transparent; /* Fondo claro similar al ejemplo */
+}

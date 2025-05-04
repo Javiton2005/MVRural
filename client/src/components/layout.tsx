@@ -8,11 +8,12 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+    <div style={{ backgroundColor: "#f8fafc" ,display: "flex", flexDirection: "column", minHeight: "100vh"}}>
       <Navbar />
       <main style={{ flexGrow: 1 }}>
         {children}
       </main>
+      <div className="spacer"></div>
       <Footer />
     </div>
   );

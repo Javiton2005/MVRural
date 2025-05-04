@@ -1,0 +1,28 @@
+/* VillageGrid.css */
+.village-grid-wrapper {
+    padding: 2rem;
+}
+
+.village-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 3.5rem;
+}
+
+.village-grid-item {
+    transition: transform 0.3s ease;
+}
+
+.village-grid-item:hover {
+    transform: translateY(-5px);
+}
+
+.loading, .error {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+}
+
+.error {
+    color: #ff3333;
+}

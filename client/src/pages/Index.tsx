@@ -2,11 +2,12 @@ import Layout from "../components/layout"
 import React, { useState,useEffect } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-import { Search } from "lucide-react";
+import { Search, Space } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import './index.css'
 import { MapPin, Map, Globe, Users } from "react-feather";
 import VillageCard, { VillageProps } from "../components/villagecard";
+import VillageGrid from "../components/villagegrid";
 
 interface Pueblo {
   id: number;
@@ -14,17 +15,6 @@ interface Pueblo {
   ubicacion: string;
   habitantes: number;
 }
-
-const puebloDemo: VillageProps =   {
-  id: "2",
-  name: "Oia",
-  location: "Santorini",
-  country: "Greece",
-  description: "Perched on the cliffs of Santorini, Oia is famous for its stunning sunset views, white-washed buildings with blue domes, and narrow winding streets. The village overlooks the vast Aegean Sea and the volcanic caldera.",
-  population: 1500,
-  imageUrl: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-  tags: ["Coastal", "Scenic", "Mediterranean", "Island"]
-};
 
 const Index: React.FC = () => {
     let cantidad: number =4;
@@ -167,25 +157,8 @@ const Index: React.FC = () => {
         </div>
       </div>
     </section>
-    <div className="village-grid-wrapper">
-      <div className="village-grid">
-        {/* {villages.map((village) => (
-          
-        ))} */}
-        <div key={puebloDemo.id} className="village-grid-item">
-            <VillageCard village={puebloDemo} />
-          </div>
-          <div key={puebloDemo.id} className="village-grid-item">
-            <VillageCard village={puebloDemo} />
-          </div>
-          <div key={puebloDemo.id} className="village-grid-item">
-            <VillageCard village={puebloDemo} />
-          </div>
-          <div key={puebloDemo.id} className="village-grid-item">
-            <VillageCard village={puebloDemo} />
-          </div>
-      </div>
-    </div>
+    <VillageGrid cantidad={4} />
+    <div className="spacer"></div>
   </Layout>
   );
 };
