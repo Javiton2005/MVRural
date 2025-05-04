@@ -44,9 +44,8 @@ const Login = () => {
           throw new Error(data.error || "Login failed");
         }
     
-        // ⭐⭐ AQUÍ VA EL CÓDIGO NUEVO ⭐⭐
         localStorage.setItem("user", JSON.stringify({
-          name: data.user.name,    // Asegúrate que el backend devuelva estos campos
+          name: data.user.username,    // Asegúrate que el backend devuelva estos campos
           email: data.user.email
         }));
     
