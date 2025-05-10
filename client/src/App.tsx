@@ -6,6 +6,8 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/login";
 import Register from "./pages/Register";
 import Villages from "./pages/Villages";
+import WorkingOnIt from "./pages/constructingPage";
+
 
 const App = () => (
   <BrowserRouter>
@@ -13,10 +15,11 @@ const App = () => (
 
     <Routes>
       <Route path="/" element={<Index />} />
-      <Route path="*" element={<NotFound/>} />
+      <Route path="/notfound" element={<NotFound/>} />
       <Route path="/login" element={<Login/>} />
       <Route path="/Register" element={<Register/>} />
       <Route path="/Villages" element={<Villages/>} />
+      <Route path="*" element={<WorkingOnIt/>} />
     </Routes>
   </BrowserRouter>
 );
