@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from supabase import create_client, Client
 from dotenv import load_dotenv
+from flask_cors import CORS  # ✅ Importa CORS
 import os
 
 load_dotenv()
@@ -11,6 +12,7 @@ key: str = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 app = Flask(__name__)
+CORS(app)  # ✅ Activa CORS globalmente
 
 # Mapeo de preferencias a valores de la base de datos
 PREFERENCE_MAPPING = {
@@ -19,6 +21,7 @@ PREFERENCE_MAPPING = {
     "ciudad": "c",
     "ninguna": "d"
 }
+
 @app.route("/turismo/<string:id>", methods=["GET"])
 def get_tourist_by_id(id):
     try:
@@ -41,7 +44,7 @@ def get_tourist_by_id(id):
             "success": False,
             "error": "Error interno del servidor"
         }), 500
-    
+
 @app.route("/pueblos", methods=["GET"])
 def get_pueblos():
     n = request.args.get("n", default=5, type=int)
@@ -77,7 +80,6 @@ def login():
                 "error": "Invalid credentials"
             }), 401
 
-        # Convertir preferencia de BD a valor amigable
         reverse_mapping = {v: k for k, v in PREFERENCE_MAPPING.items()}
         user_preference = reverse_mapping.get(user["preference"], "ninguna")
 
@@ -101,13 +103,12 @@ def login():
             "success": False,
             "error": "Internal server error"
         }), 500
-    
+
 @app.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
     
     try:
-        # Validación de campos requeridos
         required_fields = ["username", "email", "password", "preference"]
         if not all(field in data for field in required_fields):
             return jsonify({
@@ -115,7 +116,6 @@ def register():
                 "error": "Faltan campos requeridos"
             }), 400
 
-        # Verificar si el usuario ya existe
         existing_user = supabase.table("users").select("*").or_(f"email.eq.{data['email']},username.eq.{data['username']}").execute()
         
         if existing_user.data:
@@ -124,16 +124,14 @@ def register():
                 "error": "El email o username ya están registrados"
             }), 400
 
-        # Crear el nuevo usuario
         new_user = {
             "username": data["username"],
             "email": data["email"],
-            "password": data["password"],  # En producción usa bcrypt!
+            "password": data["password"],
             "user_role": "user",
             "preference": data["preference"]
         }
 
-        # Insertar en Supabase
         result = supabase.table("users").insert(new_user).execute()
         
         if not result.data:
@@ -161,7 +159,6 @@ def register():
 @app.route("/preferences", methods=["GET"])
 def get_preferences():
     try:
-        # Devuelve las preferencias con nombres amigables
         return jsonify({
             "success": True,
             "preferences": [
